@@ -1,6 +1,7 @@
+com/dofus/api/dto/Data.class
+com/dofus/api/dto/Name.class
 com/dofus/api/controller/SuccessController.class
-com/dofus/api/controller/Data.class
-com/dofus/api/controller/Name.class
+com/dofus/api/dto/Description.class
 com/dofus/api/controller/SuccessResponse.class
 com/dofus/api/config/HttpConfig.class
 com/dofus/api/success/DofusApiApplication.class

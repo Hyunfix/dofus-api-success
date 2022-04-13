@@ -1,6 +1,7 @@
 package com.dofus.api.controller;
 
 
+import com.dofus.api.dto.Data;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
