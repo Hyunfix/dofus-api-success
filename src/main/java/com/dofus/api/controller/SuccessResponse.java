@@ -54,4 +54,14 @@ public class SuccessResponse {
     public void setData(List<Data> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "SuccessResponse{" +
+                "total=" + total +
+                ", limit=" + limit +
+                ", skip=" + skip +
+                ", data=" + data +
+                '}';
+    }
 }
