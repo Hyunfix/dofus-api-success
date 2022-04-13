@@ -1,1 +1,6 @@
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/success/DofusApiApplication.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/controller/SuccessController.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/config/HttpConfig.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/controller/SuccessResponse.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/controller/Data.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/controller/Name.java
