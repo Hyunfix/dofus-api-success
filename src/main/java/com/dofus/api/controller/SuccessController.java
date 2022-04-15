@@ -33,8 +33,6 @@ public class SuccessController {
 
         String successUrl = "https://api.dofusdb.fr/achievements?";
         final SuccessResponse successResponse = new SuccessResponse();
-        try {
-
             HttpHeaders headers = new HttpHeaders();
             headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NDk3OTQwMzEsImV4cCI6MTY4MTMzMDAzMSwiYXVkIjoiaHR0cHM6Ly9kb2Z1c2RiLmZyIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjU1ZGJlZWEzOGRmOTAwMTU0MGI1ZmEiLCJqdGkiOiI5ZjY4Y2M1Zi04ZDcwLTRiZmYtOTcwZi1jODIxMzU3ZGU3NzIifQ.AlPY6byNCmyUKP-qBr4HIJDAet8fGufKr-z2AcXmcgk");
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -61,11 +59,6 @@ public class SuccessController {
 
             log.info("Response : {}", response.getBody());
             return new ResponseEntity<>(successResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            log.error("Exception message : {} ", e.getMessage());
-            log.error("Exception trace : {} ", e);
-        }
-        return new ResponseEntity<>(successResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 

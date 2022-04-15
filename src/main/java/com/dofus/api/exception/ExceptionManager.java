@@ -19,7 +19,7 @@ public class ExceptionManager {
     Logger log = LoggerFactory.getLogger(ExceptionManager.class);
 
 
-    @ExceptionHandler
+    @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity<Error> httpClientErrorException(HttpClientErrorException httpClientErrorException, WebRequest request){
         log.info("[HttpClientErrorException]", httpClientErrorException);
         return new ResponseEntity<Error>(generateError(httpClientErrorException.getRawStatusCode() + "",request,ExceptionConstantes.codeMessage.get(httpClientErrorException.getRawStatusCode() + "")),httpClientErrorException.getStatusCode());
