@@ -12,8 +12,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.nio.charset.Charset;
+import java.util.Collections;
 
 @RestController
 public class SuccessController {
@@ -27,43 +29,43 @@ public class SuccessController {
     }
 
     @GetMapping("/success")
-    public ResponseEntity<SuccessResponse> getSuccess(@RequestParam(value = "limit") int limit, @RequestParam(value = "lang", required = false) String lang,@RequestParam(value = "categoryId", required = false) String categoryId,@RequestParam(value = "skip", required = false)  int skip) {
+    public ResponseEntity<SuccessResponse> getSuccess(@RequestParam(value = "limit", defaultValue = "1") int limit, @RequestParam(value = "lang", required = false) String lang,@RequestParam(value = "categoryId", required = false) String categoryId,@RequestParam(value = "skip", required = false , defaultValue = "0")  int skip) {
 
         String successUrl = "https://api.dofusdb.fr/achievements?";
+        final SuccessResponse successResponse = new SuccessResponse();
         try {
+
             HttpHeaders headers = new HttpHeaders();
             headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NDk3OTQwMzEsImV4cCI6MTY4MTMzMDAzMSwiYXVkIjoiaHR0cHM6Ly9kb2Z1c2RiLmZyIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjU1ZGJlZWEzOGRmOTAwMTU0MGI1ZmEiLCJqdGkiOiI5ZjY4Y2M1Zi04ZDcwLTRiZmYtOTcwZi1jODIxMzU3ZGU3NzIifQ.AlPY6byNCmyUKP-qBr4HIJDAet8fGufKr-z2AcXmcgk");
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("Accept","application/json");
+            headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            String urlTemplate = UriComponentsBuilder.fromHttpUrl(successUrl)
+                    .queryParam("$skip", skip)
+                    .queryParam("$limit", limit)
+                    .encode()
+                    .toUriString();
 
             log.info("Header : {}", headers);
 
-            log.info("Url : {}", successUrl);
-
-            MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
-            params.add("$limit", limit);
-            if(StringUtils.isNotBlank(lang)){
-                params.add("lang",lang);
-            }
-            if(StringUtils.isNotBlank(categoryId)){
-                params.add("categoryId", categoryId);;
-            }
-            params.add("skip", skip);
-
-            log.info("Params : {}", params);
+            log.info("Url : {}", urlTemplate);
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
             log.info("Entity : {}", entity);
-            
-            ResponseEntity<SuccessResponse> response = restTemplateSuccess.exchange(successUrl, HttpMethod.GET, entity, SuccessResponse.class,params);
+
+            ResponseEntity<SuccessResponse> response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
+            successResponse.setData(response.getBody().getData());
+            successResponse.setLimit(response.getBody().getLimit());
+            successResponse.setTotal(response.getBody().getTotal());
 
             log.info("Response : {}", response.getBody());
-            return response;
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
         } catch (Exception e) {
             log.error("Exception message : {} ", e.getMessage());
+            log.error("Exception trace : {} ", e);
         }
-        return null;
+        return new ResponseEntity<>(successResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
