@@ -15,7 +15,9 @@
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/Titles.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/Description.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/SpellsReward.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/config/CustomClientHttpRequestInterceptor.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/config/HttpConfig.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/config/CustomRestTemplateCustomizer.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/Ornaments.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/ItemsReward.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/exception/ExceptionManager.java

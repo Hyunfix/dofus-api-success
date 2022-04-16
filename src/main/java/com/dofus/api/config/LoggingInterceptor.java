@@ -1,3 +1,4 @@
+/*
 package com.dofus.api.config;
 
 import com.dofus.api.controller.SuccessController;
@@ -34,3 +35,4 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
     }
 }
 
+*/

@@ -1,3 +1,4 @@
+/*
 package com.dofus.api.config;
 
 
@@ -18,10 +19,12 @@ import java.util.List;
 @Configuration
 public class HttpConfig {
 
-    /**
+    */
+/**
      * Bean RestTemplate pour les appels REST
      * @return
-     */
+     *//*
+
     @Bean(name = "restTemplateSuccess")
     public RestTemplate getRestTemplate(){
 
@@ -33,8 +36,8 @@ public class HttpConfig {
         if (CollectionUtils.isEmpty(interceptors)) {
             interceptors = new ArrayList<>();
         }
-        interceptors.add(new LoggingInterceptor());
-        restTemplate.setInterceptors(interceptors);
+        //interceptors.add(new LoggingInterceptor());
+       // restTemplate.setInterceptors(interceptors);
 
         restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
 
@@ -47,3 +50,4 @@ public class HttpConfig {
         return restTemplate;
     }
 }
+*/

@@ -6,15 +6,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 public class SuccessController {
@@ -23,15 +33,15 @@ public class SuccessController {
 
     Logger log = LoggerFactory.getLogger(SuccessController.class);
 
-    public SuccessController(@Qualifier("restTemplateSuccess") RestTemplate restTemplateSuccess) {
-        restTemplateSuccess = this.restTemplateSuccess;
+
+    public SuccessController(final RestTemplateBuilder restTemplateBuilder){
+        this.restTemplateSuccess = restTemplateBuilder.build();
     }
 
     @GetMapping("/success")
     public ResponseEntity<SuccessResponse> getSuccess(@RequestParam(value = "limit", defaultValue = "1") int limit, @RequestParam(value = "lang", required = false) String lang,@RequestParam(value = "categoryId", required = false) String categoryId,@RequestParam(value = "skip", required = false , defaultValue = "0")  int skip) {
 
         String successUrl = "https://api.dofusdb.fr/achievements?";
-        final SuccessResponse successResponse = new SuccessResponse();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NDk3OTQwMzEsImV4cCI6MTY4MTMzMDAzMSwiYXVkIjoiaHR0cHM6Ly9kb2Z1c2RiLmZyIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjU1ZGJlZWEzOGRmOTAwMTU0MGI1ZmEiLCJqdGkiOiI5ZjY4Y2M1Zi04ZDcwLTRiZmYtOTcwZi1jODIxMzU3ZGU3NzIifQ.AlPY6byNCmyUKP-qBr4HIJDAet8fGufKr-z2AcXmcgk");
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -53,12 +63,8 @@ public class SuccessController {
 
         ResponseEntity<SuccessResponse> response =  restTemplateSuccess.getForEntity(urlTemplate,SuccessResponse.class);
        // ResponseEntity<SuccessResponse> response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
-        successResponse.setData(response.getBody().getData());
-        successResponse.setLimit(response.getBody().getLimit());
-        successResponse.setTotal(response.getBody().getTotal());
-
         log.info("Response : {}", response.getBody());
-        return new ResponseEntity<>(successResponse, HttpStatus.OK);
+        return new ResponseEntity<SuccessResponse>(HttpStatus.OK);
     }
 }
 

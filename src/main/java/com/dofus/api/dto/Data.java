@@ -6,7 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.sql.Array;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,14 +42,13 @@ public class Data implements Serializable {
     int descriptionId;
 
     @JsonProperty("description")
-    List<Description> description;
+    List<Description> description = new ArrayList<>();
 
     @JsonProperty("iconId")
     int iconId;
 
     @JsonProperty("points")
     int points;
-
 
     @JsonProperty("level")
     int level;
@@ -67,7 +68,6 @@ public class Data implements Serializable {
     @JsonProperty("__v")
     int __v;
 
-
     @JsonProperty("slug")
     List<Slug> slug;
 
@@ -75,16 +75,16 @@ public class Data implements Serializable {
     String img;
 
     @JsonProperty("_include")
-    List<Include> _include;
+    List<Include> _include = new ArrayList<>();
 
     @JsonProperty("objectives")
-    List<Objectives> objectives;
+    List<Objectives> objectives = new ArrayList<>();
 
     @JsonProperty("category")
-    List<Category> category;
+    List<Category> category = new ArrayList<>();
 
     @JsonProperty("rewards")
-    List<Rewards> rewards;
+    List<Rewards> rewards = new ArrayList<>();
 
     public String get_id() {
         return _id;
