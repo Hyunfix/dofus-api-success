@@ -3,11 +3,13 @@ package com.dofus.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -33,6 +35,14 @@ public class HttpConfig {
         }
         interceptors.add(new LoggingInterceptor());
         restTemplate.setInterceptors(interceptors);
+
+        restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
+
+            @Override
+            protected boolean hasError(HttpStatus statusCode) {
+                return statusCode != HttpStatus.NOT_FOUND && super.hasError(statusCode);
+            }
+        });
 
         return restTemplate;
     }

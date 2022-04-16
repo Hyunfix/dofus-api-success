@@ -2,6 +2,7 @@ com/dofus/api/dto/Rewards.class
 com/dofus/api/dto/OrnamentsReward.class
 com/dofus/api/dto/Objectives.class
 com/dofus/api/dto/Description.class
+com/dofus/api/config/HttpConfig$1.class
 com/dofus/api/dto/ItemsReward.class
 com/dofus/api/dto/SpellsReward.class
 com/dofus/api/exception/Error.class

@@ -2,6 +2,7 @@ package com.dofus.api.controller;
 
 
 import com.dofus.api.dto.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Retour du service Success
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class SuccessResponse implements Serializable {
 
     @JsonProperty("total")

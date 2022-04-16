@@ -2,15 +2,18 @@ package com.dofus.api.dto;
 
 
 import com.dofus.api.dto.Name;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * Classe data success
  */
-public class Data {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Data implements Serializable {
 
     @JsonProperty("_id")
     String _id;

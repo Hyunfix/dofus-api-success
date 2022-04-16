@@ -25,6 +25,12 @@ public class ExceptionManager {
         return new ResponseEntity<Error>(generateError(httpClientErrorException.getRawStatusCode() + "",request,ExceptionConstantes.codeMessage.get(httpClientErrorException.getRawStatusCode() + "")),httpClientErrorException.getStatusCode());
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<Error> notFoundException(final NullPointerException exception,WebRequest request) {
+        log.error("[NullPointerException]",exception);
+        return new ResponseEntity<Error>(notFoundError(ExceptionConstantes.NOT_FOUND_EXCEPTION_CODE,request),HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Error> httpClientErrorException(Exception exception, WebRequest request){
         log.info("[Exception]", exception);
@@ -41,5 +47,9 @@ public class ExceptionManager {
 
     private Error internalError(String codeError,WebRequest request){
         return generateError(codeError,request,ExceptionConstantes.INTERNAL_ERREUR_MESSAGE);
+    }
+
+    private Error notFoundError(String codeError,WebRequest request){
+        return generateError(codeError,request,ExceptionConstantes.NOT_FOUND_ERREUR_MESSAGE);
     }
 }
