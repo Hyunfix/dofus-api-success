@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class SuccessResponse implements Serializable {
     int skip;
 
     @JsonProperty("data")
-    List<Data> data;
+    List<Data> dataList = new ArrayList<>();
 
     public int getTotal() {
         return total;
@@ -50,13 +51,18 @@ public class SuccessResponse implements Serializable {
         this.skip = skip;
     }
 
-    public List<Data> getData() {
-        return data;
+    public List<Data> getDataList() {
+        return dataList;
     }
 
-    public void setData(List<Data> data) {
-        this.data = data;
+    public void setDataList(List<Data> dataList) {
+        this.dataList = dataList;
     }
+
+    public void addVariable(Data data){
+        this.dataList.add(data);
+    }
+
 
     @Override
     public String toString() {
@@ -64,7 +70,7 @@ public class SuccessResponse implements Serializable {
                 "total=" + total +
                 ", limit=" + limit +
                 ", skip=" + skip +
-                ", data=" + data +
+                ", dataList=" + dataList +
                 '}';
     }
 }

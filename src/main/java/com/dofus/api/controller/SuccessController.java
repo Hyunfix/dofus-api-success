@@ -1,5 +1,6 @@
 package com.dofus.api.controller;
 
+import com.dofus.api.dto.Data;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,23 +49,51 @@ public class SuccessController {
         headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NDk3OTQwMzEsImV4cCI6MTY4MTMzMDAzMSwiYXVkIjoiaHR0cHM6Ly9kb2Z1c2RiLmZyIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjU1ZGJlZWEzOGRmOTAwMTU0MGI1ZmEiLCJqdGkiOiI5ZjY4Y2M1Zi04ZDcwLTRiZmYtOTcwZi1jODIxMzU3ZGU3NzIifQ.AlPY6byNCmyUKP-qBr4HIJDAet8fGufKr-z2AcXmcgk");
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-
-        String urlTemplate = UriComponentsBuilder.fromHttpUrl(successUrl)
-                    .queryParam("$skip", skip)
-                    .queryParam("$limit", limit)
-                    .encode()
-                    .toUriString();
+        String urlTemplate = null;
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
+        ResponseEntity<SuccessResponse> response = null;
 
+        if(limit > 1) {
+        for (int i=0; i<58;i++) {
+            if (i == 0) {
+                urlTemplate = getUrlTemplate(urlTemplate, successUrl, skip, limit);
+            } else {
+                urlTemplate = UriComponentsBuilder.fromHttpUrl(successUrl)
+                        .queryParam("$skip", skip + 50)
+                        .queryParam("$limit", limit)
+                        .encode()
+                        .toUriString();
+            }
 
-       ResponseEntity<SuccessResponse> response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
-       successResponse.setTotal(response.getBody().getTotal());
-       successResponse.setLimit(response.getBody().getLimit());
-       successResponse.setSkip(response.getBody().getSkip());
-       successResponse.setData(response.getBody().getData());
-       log.info("Response : {}", response.getBody());
+            response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
+            skip = response.getBody().getSkip();
+            response.getBody().getDataList().stream().forEach(data -> {
+                successResponse.addVariable(data);
+            });
+        }
+         successResponse.setTotal(response.getBody().getTotal());
+         successResponse.setLimit(response.getBody().getLimit());
+         successResponse.setSkip(response.getBody().getSkip());
+        }else {
+            urlTemplate = getUrlTemplate(urlTemplate, successUrl, skip, limit);
+            response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
+            successResponse.setTotal(response.getBody().getTotal());
+            successResponse.setLimit(response.getBody().getLimit());
+            successResponse.setSkip(response.getBody().getSkip());
+            successResponse.setDataList(response.getBody().getDataList());
+        }
+
        return new ResponseEntity<SuccessResponse>(successResponse,HttpStatus.OK);
+    }
+
+    private String getUrlTemplate(String urlTemplate, String successUrl, int skip, int limit) {
+        urlTemplate = UriComponentsBuilder.fromHttpUrl(successUrl)
+                .queryParam("$skip", skip)
+                .queryParam("$limit", limit)
+                .encode()
+                .toUriString();
+        return urlTemplate;
     }
 }
 
