@@ -22,19 +22,19 @@ public class Rewards {
 
     @JsonProperty("emotesReward")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<EmotesReward> emotesReward = new ArrayList<>();
+    private List<Integer> emotesReward = new ArrayList<>();
 
     @JsonProperty("spellsReward")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<SpellsReward> spellsReward = new ArrayList<>();
+    private List<Integer> spellsReward = new ArrayList<>();
 
     @JsonProperty("titlesReward")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<TitlesRewards> titlesReward = new ArrayList<>();
+    private List<Integer> titlesReward = new ArrayList<>();
 
     @JsonProperty("ornamentsReward")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<OrnamentsReward> ornamentsReward = new ArrayList<>();
+    private List<Integer> ornamentsReward = new ArrayList<>();
 
     @JsonProperty("id")
     private int id;
@@ -59,7 +59,6 @@ public class Rewards {
 
     @JsonProperty("updateAt")
     LocalDateTime updateAt;
-
 
     @JsonProperty("__v")
     int __v;
@@ -104,35 +103,44 @@ public class Rewards {
         this.itemsQuantityReward = itemsQuantityReward;
     }
 
-    public List<EmotesReward> getEmotesReward() {
+    public List<Integer> getEmotesReward() {
         return emotesReward;
     }
 
-    public void setEmotesReward(List<EmotesReward> emotesReward) {
+    public void setEmotesReward(List<Integer> emotesReward) {
         this.emotesReward = emotesReward;
     }
 
-    public List<SpellsReward> getSpellsReward() {
+    public List<Integer> getSpellsReward() {
         return spellsReward;
     }
 
-    public void setSpellsReward(List<SpellsReward> spellsReward) {
+    public void setSpellsReward(List<Integer> spellsReward) {
         this.spellsReward = spellsReward;
     }
 
-    public List<TitlesRewards> getTitlesReward() {
+    public List<Integer> getTitlesReward() {
         return titlesReward;
     }
 
-    public void setTitlesReward(List<TitlesRewards> titlesReward) {
+    public void setTitlesReward(List<Integer> titlesReward) {
         this.titlesReward = titlesReward;
     }
 
-    public List<OrnamentsReward> getOrnamentsReward() {
+
+    public List<Titles> getTitles() {
+        return titles;
+    }
+
+    public void setTitles(List<Titles> titles) {
+        this.titles = titles;
+    }
+
+    public List<Integer> getOrnamentsReward() {
         return ornamentsReward;
     }
 
-    public void setOrnamentsReward(List<OrnamentsReward> ornamentsReward) {
+    public void setOrnamentsReward(List<Integer> ornamentsReward) {
         this.ornamentsReward = ornamentsReward;
     }
 
@@ -232,11 +240,5 @@ public class Rewards {
         this.ornaments = ornaments;
     }
 
-    public List<Titles> getTitles() {
-        return titles;
-    }
 
-    public void setTitles(List<Titles> titles) {
-        this.titles = titles;
-    }
 }

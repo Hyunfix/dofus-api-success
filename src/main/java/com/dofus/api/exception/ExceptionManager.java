@@ -1,6 +1,7 @@
 package com.dofus.api.exception;
 
 import com.dofus.api.controller.SuccessController;
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,12 @@ public class ExceptionManager {
     @ExceptionHandler(RestClientException.class)
     public ResponseEntity<Error> restClientException(final RestClientException restClientException,WebRequest request) {
         log.error("[RestClientException]",restClientException);
+        return new ResponseEntity<Error>(internalError(ExceptionConstantes.INTERNAL_EXCEPTION_CODE,request), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(InvalidDefinitionException.class)
+    public ResponseEntity<Error> invalidDefinitionException(final InvalidDefinitionException invalidDefinitionException,WebRequest request) {
+        log.error("[InvalidDefinitionException]",invalidDefinitionException);
         return new ResponseEntity<Error>(internalError(ExceptionConstantes.INTERNAL_EXCEPTION_CODE,request), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
