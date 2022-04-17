@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,12 @@ public class ExceptionManager {
     public ResponseEntity<Error> httpClientErrorException(HttpClientErrorException httpClientErrorException, WebRequest request){
         log.info("[HttpClientErrorException]", httpClientErrorException);
         return new ResponseEntity<Error>(generateError(httpClientErrorException.getRawStatusCode() + "",request,ExceptionConstantes.codeMessage.get(httpClientErrorException.getRawStatusCode() + "")),httpClientErrorException.getStatusCode());
+    }
+
+    @ExceptionHandler(RestClientException.class)
+    public ResponseEntity<Error> restClientException(final RestClientException restClientException,WebRequest request) {
+        log.error("[RestClientException]",restClientException);
+        return new ResponseEntity<Error>(internalError(ExceptionConstantes.INTERNAL_EXCEPTION_CODE,request), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(NullPointerException.class)

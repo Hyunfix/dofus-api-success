@@ -1,5 +1,6 @@
 package com.dofus.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class Category {
     private int id;
 
     @JsonProperty("name")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<Name> name;
 
 

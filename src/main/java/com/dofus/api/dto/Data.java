@@ -2,6 +2,7 @@ package com.dofus.api.dto;
 
 
 import com.dofus.api.dto.Name;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -33,7 +34,8 @@ public class Data implements Serializable {
     String nameId;
 
     @JsonProperty("name")
-    List<Name> name;
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    List<Name> name = new ArrayList<>();
 
     @JsonProperty("categoryId")
     int categoryId;
@@ -42,6 +44,7 @@ public class Data implements Serializable {
     int descriptionId;
 
     @JsonProperty("description")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Description> description = new ArrayList<>();
 
     @JsonProperty("iconId")
@@ -69,21 +72,26 @@ public class Data implements Serializable {
     int __v;
 
     @JsonProperty("slug")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Slug> slug;
 
     @JsonProperty("img")
     String img;
 
     @JsonProperty("_include")
-    List<Include> _include = new ArrayList<>();
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    List<String> _include = new ArrayList<>();
 
     @JsonProperty("objectives")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Objectives> objectives = new ArrayList<>();
 
     @JsonProperty("category")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Category> category = new ArrayList<>();
 
     @JsonProperty("rewards")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Rewards> rewards = new ArrayList<>();
 
     public String get_id() {
@@ -238,11 +246,11 @@ public class Data implements Serializable {
         this.img = img;
     }
 
-    public List<Include> get_include() {
+    public List<String> get_include() {
         return _include;
     }
 
-    public void set_include(List<Include> _include) {
+    public void set_include(List<String> _include) {
         this._include = _include;
     }
 

@@ -1,5 +1,6 @@
 package com.dofus.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
@@ -12,21 +13,27 @@ public class Rewards {
     private String _id;
 
     @JsonProperty("itemsRewards")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<ItemsReward> itemsRewards = new ArrayList<>();
 
     @JsonProperty("itemsQuantityReward")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<ItemsQuantityReward> itemsQuantityReward = new ArrayList<>();
 
     @JsonProperty("emotesReward")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<EmotesReward> emotesReward = new ArrayList<>();
 
     @JsonProperty("spellsReward")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<SpellsReward> spellsReward = new ArrayList<>();
 
     @JsonProperty("titlesReward")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<TitlesRewards> titlesReward = new ArrayList<>();
 
     @JsonProperty("ornamentsReward")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<OrnamentsReward> ornamentsReward = new ArrayList<>();
 
     @JsonProperty("id")
@@ -58,15 +65,19 @@ public class Rewards {
     int __v;
 
     @JsonProperty("_include")
-    List<Include> _include  = new ArrayList<>();
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    List<String> _include  = new ArrayList<>();
 
     @JsonProperty("items")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Items> items  = new ArrayList<>();
 
     @JsonProperty("ornaments")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Ornaments> ornaments  = new ArrayList<>();
 
     @JsonProperty("titles")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Titles> titles  = new ArrayList<>();
 
     public String get_id() {
@@ -197,11 +208,11 @@ public class Rewards {
         this.__v = __v;
     }
 
-    public List<Include> get_include() {
+    public List<String> get_include() {
         return _include;
     }
 
-    public void set_include(List<Include> _include) {
+    public void set_include(List<String> _include) {
         this._include = _include;
     }
 

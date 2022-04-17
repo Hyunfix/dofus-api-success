@@ -7,31 +7,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Name {
 
     @JsonProperty("de")
-    private String de;
+    String de;
 
     @JsonProperty("en")
-    private String en;
+    String en;
 
     @JsonProperty("es")
-    private String es;
+    String es;
 
     @JsonProperty("fr")
-    private String fr;
+    String fr;
 
     @JsonProperty("it")
-    private String it;
+    String it;
 
     @JsonProperty("nl")
-    private String nl;
+    String nl;
 
     @JsonProperty("ru")
-    private String ru;
+    String ru;
 
     @JsonProperty("pt")
-    private String pt;
+    String pt;
 
     @JsonProperty("id")
-    private int id;
+    int id;
 
     public String getDe() {
         return de;

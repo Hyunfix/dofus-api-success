@@ -41,6 +41,7 @@ public class SuccessController {
     @GetMapping("/success")
     public ResponseEntity<SuccessResponse> getSuccess(@RequestParam(value = "limit", defaultValue = "1") int limit, @RequestParam(value = "lang", required = false) String lang,@RequestParam(value = "categoryId", required = false) String categoryId,@RequestParam(value = "skip", required = false , defaultValue = "0")  int skip) {
 
+        final SuccessResponse successResponse = new SuccessResponse();
         String successUrl = "https://api.dofusdb.fr/achievements?";
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJpYXQiOjE2NDk3OTQwMzEsImV4cCI6MTY4MTMzMDAzMSwiYXVkIjoiaHR0cHM6Ly9kb2Z1c2RiLmZyIiwiaXNzIjoiZmVhdGhlcnMiLCJzdWIiOiI2MjU1ZGJlZWEzOGRmOTAwMTU0MGI1ZmEiLCJqdGkiOiI5ZjY4Y2M1Zi04ZDcwLTRiZmYtOTcwZi1jODIxMzU3ZGU3NzIifQ.AlPY6byNCmyUKP-qBr4HIJDAet8fGufKr-z2AcXmcgk");
@@ -53,18 +54,16 @@ public class SuccessController {
                     .encode()
                     .toUriString();
 
-        log.info("Header : {}", headers);
-
-        log.info("Url : {}", urlTemplate);
-
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        log.info("Entity : {}", entity);
 
-        ResponseEntity<SuccessResponse> response =  restTemplateSuccess.getForEntity(urlTemplate,SuccessResponse.class);
-       // ResponseEntity<SuccessResponse> response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
-        log.info("Response : {}", response.getBody());
-        return new ResponseEntity<SuccessResponse>(HttpStatus.OK);
+       ResponseEntity<SuccessResponse> response = restTemplateSuccess.exchange(urlTemplate, HttpMethod.GET, entity, SuccessResponse.class);
+       successResponse.setTotal(response.getBody().getTotal());
+       successResponse.setLimit(response.getBody().getLimit());
+       successResponse.setSkip(response.getBody().getSkip());
+       successResponse.setData(response.getBody().getData());
+       log.info("Response : {}", response.getBody());
+       return new ResponseEntity<SuccessResponse>(successResponse,HttpStatus.OK);
     }
 }
 
