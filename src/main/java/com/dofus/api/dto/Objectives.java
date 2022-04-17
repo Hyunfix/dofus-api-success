@@ -18,6 +18,7 @@ public class Objectives {
     int id;
 
     @JsonProperty("name")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     List<Name> name;
 
     @JsonProperty("img")

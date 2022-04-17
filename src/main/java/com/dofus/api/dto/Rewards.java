@@ -14,11 +14,11 @@ public class Rewards {
 
     @JsonProperty("itemsRewards")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<ItemsReward> itemsRewards = new ArrayList<>();
+    private List<Integer> itemsRewards = new ArrayList<>();
 
     @JsonProperty("itemsQuantityReward")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-    private List<ItemsQuantityReward> itemsQuantityReward = new ArrayList<>();
+    private List<Integer> itemsQuantityReward = new ArrayList<>();
 
     @JsonProperty("emotesReward")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
@@ -84,23 +84,23 @@ public class Rewards {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(String _id)
+    {
         this._id = _id;
     }
-
-    public List<ItemsReward> getItemsRewards() {
+    public List<Integer> getItemsRewards() {
         return itemsRewards;
     }
 
-    public void setItemsRewards(List<ItemsReward> itemsRewards) {
+    public void setItemsRewards(List<Integer> itemsRewards) {
         this.itemsRewards = itemsRewards;
     }
 
-    public List<ItemsQuantityReward> getItemsQuantityReward() {
+    public List<Integer> getItemsQuantityReward() {
         return itemsQuantityReward;
     }
 
-    public void setItemsQuantityReward(List<ItemsQuantityReward> itemsQuantityReward) {
+    public void setItemsQuantityReward(List<Integer> itemsQuantityReward) {
         this.itemsQuantityReward = itemsQuantityReward;
     }
 
