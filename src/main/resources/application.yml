@@ -1,11 +1,12 @@
 logging:
   level:
-    com.dofus.api: INFO
+    com.dofus.api: DEBUG
 
 spring:
+  api:
+    token: ${{ API_KEY }}
   jackson:
     default-property-inclusion: non_null
-
 
 springdoc:
   swagger-ui:

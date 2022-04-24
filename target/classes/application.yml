@@ -1,6 +1,6 @@
 logging:
   level:
-    com.dofus.api: INFO
+    com.dofus.api: DEBUG
 
 spring:
   jackson:

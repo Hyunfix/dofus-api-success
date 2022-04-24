@@ -9,6 +9,7 @@
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/exception/ExceptionManager.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/exception/ExceptionConstantes.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/Category.java
+/Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/utils/ControllerUtils.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/dto/Rewards.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/success/DofusApiApplication.java
 /Users/velzog/Documents/GitHub/dofus-api-success/src/main/java/com/dofus/api/controller/SuccessController.java
