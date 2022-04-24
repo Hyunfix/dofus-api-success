@@ -7,6 +7,7 @@ com/dofus/api/controller/SuccessController.class
 com/dofus/api/dto/Ornaments.class
 com/dofus/api/dto/Objectives.class
 com/dofus/api/dto/Description.class
+com/dofus/api/utils/ControllerUtils.class
 com/dofus/api/dto/Items.class
 com/dofus/api/dto/Name.class
 com/dofus/api/dto/Titles.class
